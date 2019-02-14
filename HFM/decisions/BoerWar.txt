@@ -336,7 +336,6 @@ political_decisions = {
 		
 		allow = {
 			war = no
-			nationalism_n_imperialism = 1
 			owns = 2087
 		}
 		
@@ -345,7 +344,6 @@ political_decisions = {
 			SAF = {
 				all_core = {
 					limit = { NOT = { owned_by = THIS } }
-					remove_core = SAF
 				}
 				primary_culture = THIS
 				add_accepted_culture = boer
@@ -470,10 +468,7 @@ political_decisions = {
 	claim_north_cape_colony = {
 		picture = map_africa
 		potential = {
-			OR = {
-				tag = ENG
-				tag = ENL
-			}
+			owns = 2087
 			2093 = {
 				empty = no
 				NOT = { owned_by = THIS }
@@ -532,14 +527,12 @@ political_decisions = {
 	claim_xhosa_lands = {
 		picture = map_africa
 		potential = {
-			OR = {
-				tag = ENG
-				tag = ENL
-			}
+			capital_scope = { continent = europe }
 			has_country_flag = treaty_of_umtata
 			owns = 2087
 			XHO = { exists = yes neighbour = THIS }
 			NOT = { has_country_flag = claimed_xhosa }
+			NOT = { tag = NET }
 		}
 		
 		allow = {
@@ -659,6 +652,7 @@ political_decisions = {
 				truce_with = THIS
 			}
 			NOT = { XHO = { has_country_flag = treaty_of_umtata } }
+			NOT = { tag = NET }
 		}
 		
 		allow = {

@@ -1,0 +1,125 @@
+#################################################################
+#								#
+#		End of British Rule in Cape			#
+#								#
+#################################################################
+
+country_event = {
+	id = 1000001
+	title = "EVTNAME1000001" #End of British Rule in Cape
+	desc = "EVTDESC1000001"
+	picture = "pioneer_wagons"
+       
+        trigger = {
+		capital_scope = { 
+			continent = europe 
+		}
+		war = no
+		owns = 2087
+		NOT = { 
+			has_global_flag = british_leave_cape
+			has_global_flag = british_cape_return
+			TAG = ENG
+	}
+	
+	fire_only_once = yes
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = "EVT1000001OPTA"
+		set_global_flag = british_leave_cape
+		ENG = {
+			country_event = { 
+				id = 1000002 days = 1 
+			}
+		}
+		2087 = { 
+			owner = {
+				any_pop = {
+				limit = {
+					location = {
+						OR = {
+							is_core = SAF
+							is_core = VLK
+						}
+						culture = british
+						strata = rich
+					}
+				}
+				reduce_pop = 0.2
+				move_pop = 1384
+			}
+		}
+	}
+}
+
+country_event = {
+	id = 1000002
+	title = "EVTNAME1000002" #End of British Interests in South Africa?
+	desc = "EVTDESC1000002"
+	picture = "pioneer_wagons"
+       
+        is_triggered_only = yes
+
+	option = {
+		name = "EVT1000002OPTA" #Britain gives up with Xhosa
+		end_war = XHO
+		prestige = 5		
+		leave_alliance = XHO
+		diplomatic_influence = { 
+			who = XHO value = -400 
+		}
+		relation = { 
+			who = XHO value = -100 
+		}
+		XHO = {
+			country_event = { 
+				id = 1000003 days = 30 
+			}
+		}
+		ai_chance = {
+			factor = 95
+		}
+	}
+	
+	option = {
+		name = "EVT1000002OPTB" #Britain wants to keep interest in the region
+		prestige = -5		
+		relation = { 
+			who = 2087 = { 
+				owner = value = -20
+			}
+		}
+		ai_chance = {
+			factor = 5
+		}
+	}
+}
+
+country_event = {
+	id = 1000003
+	title = "EVTNAME1000003" #Resumption of Xhosa hostilities with the Europeans
+	desc = "EVTDESC1000003"
+	picture = "zulu"
+       
+        is_triggered_only = yes
+
+	option = {
+		name = "EVT1000003OPTA"
+		2087 = { 
+			owner = {
+				leave_alliance = XHO
+				diplomatic_influence = { who = XHO value = -200 }
+				relation = { who = XHO value = -100 }
+				casus_belli = {
+					target = XHO
+					type = add_to_sphere
+					months = 60
+				}
+			}
+		}
+	}
+}

@@ -14,7 +14,6 @@ country_event = {
 		capital_scope = { 
 			continent = europe 
 		}
-		war = no
 		owns = 2087
 		NOT = { 
 			has_global_flag = british_leave_cape

@@ -2056,19 +2056,53 @@ country_event = {
 			tag = NAL
 		}
 		ai = yes
-		SAF = { exists = yes }
+		OR = { 
+			SAF = { 
+				exists = yes 
+			}
+			VLK = {
+				exists = yes
+			}
 		war = no
 		OR = {
 			AND = {
-				in_sphere = ENG
-				SAF = { vassal_of = ENG }
+				2087 = {
+					owner = {
+						is_sphere_leader_of = THIS
+					}
+				}
+				SAF = { 
+					vassal_of = 
+						2087 = {
+							owner = {
+								is_sphere_leader_of = THIS
+						}
+					}
+				}
 			}
 			AND = {
-				in_sphere = ENL
-				SAF = { vassal_of = ENL }
+				2087 = {
+					owner = {
+						is_sphere_leader_of = THIS
+					}
+				}
+				VLK = { 
+					vassal_of = 
+						2087 = {
+							owner = {
+								is_sphere_leader_of = THIS
+						}
+					}
+				}
 			}
-			in_sphere = SAF
-			relation = { who = SAF value = 100 }
+			OR = { 
+				in_sphere = SAF
+				in_sphere = VLK
+			}
+			OR = { 
+				relation = { who = SAF value = 100 }
+				relation = { who = VLK value = 100 }
+			}
 			AND = {
 				tag = ORA
 				NOT = { exists = TRN }
@@ -2082,9 +2116,13 @@ country_event = {
 		}
 		NOT = {
 			has_country_flag = asked_to_join
-			truce_with = ENG
-			truce_with = ENL
+			2087 = {
+				owner = {
+					truce_with = THIS
+				}
+			}
 			truce_with = SAF
+			truce_with = VLK
 		}
 	}
 	
@@ -2096,8 +2134,10 @@ country_event = {
 		name = "EVT98240OPTA"
 		set_country_flag = asked_to_join
 		all_core = { add_core = SAF }
-		SAF = {
-			country_event = 60130
+		2087 = {
+			owner = {
+				country_event = 60130
+			}
 		}
 	}
 }
@@ -2177,9 +2217,9 @@ country_event = { #Called if Appeal to the British decision is taken. Works for 
 }
 
 #################################################################
-#																#
-#      	      		Second Boer War Events						#
-#																#
+#								#
+#      	      		Second Boer War Events			#
+#								#
 #################################################################
 # England attempts to annex Transvaal
 country_event = {
@@ -2217,6 +2257,10 @@ country_event = {
 					neighbour = SAF
 					SAF = { vassal_of = { capital_scope = { continent = europe } } }
 				}
+				AND = {
+					neighbour = VLK
+					VLK = { vassal_of = { capital_scope = { continent = europe } } }
+				}
 			}
 			is_vassal = no
 			war = no
@@ -2225,7 +2269,10 @@ country_event = {
 		NOT = {
 			has_global_flag = second_boer_war
 			has_global_flag = no_boer_war
-			exists = SAF
+			OR = {
+				exists = SAF
+				exists = VLK
+			}
 			exists = ZUL
 			truce_with = TRN
 		}
@@ -2333,7 +2380,7 @@ country_event = {
 					alliance_with = THIS	
 					truce_with = THIS
 					war_policy = pacifism
-					relation = { who = ENG value = 1 }
+					relation = { who = THIS value = 1 }
 				}
 			}
 			country_event = 6060
@@ -2382,11 +2429,13 @@ country_event = { #Oranje & Natalia can rally to Transvaal's side in Second Boer
 			name = small_country_draft
 			duration = 1095
 		}
-		ENG = {
-			war = {
-				target = THIS
-				attacker_goal = { casus_belli = conquest_any }
-				defender_goal = { casus_belli = humiliate }
+		2087 = { 
+			owner = {
+				war = {
+					target = THIS
+					attacker_goal = { casus_belli = conquest_any }
+					defender_goal = { casus_belli = humiliate }
+				}
 			}
 		}
 		ai_chance = { factor = 100}
@@ -2402,9 +2451,9 @@ country_event = { #Oranje & Natalia can rally to Transvaal's side in Second Boer
 }
 
 #################################################################
-#																#
-#      	    Friendly Great Powers Come to Boer Aid				#
-#																#
+#								#
+#      	    Friendly Great Powers Come to Boer Aid		#
+#								#
 #################################################################
 country_event = { #Rally to the Boer Cause?
 	id = 6060
@@ -2445,9 +2494,9 @@ country_event = { #Rally to the Boer Cause?
 }
 
 #################################################################
-#																#
-#      	   Second Boer War Ends in Boer Victory Events			#
-#																#
+#								#
+#      	   Second Boer War Ends in Boer Victory Events		#
+#								#
 #################################################################
 #South Africa surrender event
 country_event = { #Event called if Treaty of Vereeniging decision is taken
@@ -2467,6 +2516,7 @@ country_event = { #Event called if Treaty of Vereeniging decision is taken
 		name = "EVT98247OPTA"
 		prestige = -50
 		SAF = { all_core = { remove_core = THIS } }
+		VLK = { all_core = { remove_core = THIS } }
 		random_country = {
 			limit = {
 				war_with = THIS
@@ -2545,7 +2595,12 @@ country_event = { #Called from 98247 first option.
 		prestige = 25
 		FROM = {
 			any_owned = {
-				limit = { is_core = SAF }
+				limit = { 
+					OR = {
+						is_core = SAF 
+						is_core = VLK 
+					}
+				}
 				secede_province = THIS
 			}
 			relation = { who = THIS value = 200 }
@@ -2578,7 +2633,12 @@ country_event = { #Called from 98247 second option.
 		prestige = 25
 		FROM = {
 			any_owned = {
-				limit = { is_core = SAF }
+				limit = { 
+					OR = {
+						is_core = SAF 
+						is_core = VLK 
+					}
+				}
 				secede_province = THIS
 			}
 			casus_belli = {
@@ -2608,9 +2668,9 @@ country_event = { #Called from 98247 second option.
 }
 
 #################################################################
-#																#
-#      	      			Xulu & Xhosa Wars						#
-#																#
+#								#
+#      	      			Xulu & Xhosa Wars		#
+#								#
 #################################################################
 
 # Border Dispute with the Zulu
@@ -2624,7 +2684,12 @@ country_event = {
 		war = no
 		owns = 2087
 		year = 1878
-		NOT = { exists = SAF }
+		NOT = { 
+			OR = {
+				exists = SAF
+				exists = VLK
+			}
+		}
 		ZUL = {
 			neighbour = THIS
 			war = no
@@ -2846,7 +2911,38 @@ country_event = {
 		set_country_flag = walvis_bay
 		prestige = 5
 		treasury = -10000
-		2083 = { secede_province = THIS change_province_name = "Walvis Bay" life_rating = 25 any_pop = { literacy = -0.99 } }
+		random_owned = {
+				limit = {
+					owner = {
+						primary_culture = dutch
+					}
+				}
+			2083 = { 
+				secede_province = THIS 
+				change_province_name = "Walvisch Baye" 
+				life_rating = 25 
+				any_pop = { 
+					literacy = -0.99 
+				} 
+			}
+		}
+		random_owned = {
+				limit = {
+					NOT = {
+						owner = {
+							primary_culture = dutch
+						}
+					}
+				}
+			2083 = { 
+				secede_province = THIS 
+				change_province_name = "Walvis Bay" 
+				life_rating = 25 
+				any_pop = { 
+					literacy = -0.99 
+				} 
+			}
+		}
 		ai_chance = {
 			factor = 100
 			modifier = {
@@ -2922,7 +3018,7 @@ country_event = {
 				2088 = { empty = yes }
 			}
 			2088 = {
-				secede_province = ENG
+				secede_province = THIS
 				any_pop = { limit = { NOT = { has_pop_culture = boer } } literacy = -0.99 }
 				change_province_name = "Springbok" 
 				life_rating = 15
@@ -2935,7 +3031,7 @@ country_event = {
 				2558 = { empty = yes }
 			}
 			2558 = {
-				secede_province = ENG
+				secede_province = THIS
 				any_pop = { limit = { has_pop_culture = boer } literacy = 0.2 } 
 				any_pop = { limit = { NOT = { has_pop_culture = boer } } literacy = -0.99 }
 				change_province_name = "De Aar"
@@ -2948,7 +3044,7 @@ country_event = {
 				2093 = { empty = yes }
 			}
 			2093 = {
-				secede_province = ENG
+				secede_province = THIS
 				any_pop = { limit = { has_pop_culture = boer } literacy = 0.29 }
 				any_pop = { limit = { NOT = { has_pop_culture = boer } } literacy = -0.99 }
 				change_province_name = "Calvinia"

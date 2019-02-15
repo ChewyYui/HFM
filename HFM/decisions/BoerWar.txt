@@ -326,7 +326,6 @@ political_decisions = {
 					is_culture_group = THIS 
 				}
 			}
-			tag = NET
 		}
 
 		allow = {
@@ -353,6 +352,7 @@ political_decisions = {
 					add_accepted_culture = boer
 					set_country_flag = post_colonial_country
 				}
+				set_global_flag = dutch_cape
 			}
 			any_owned = {
 				limit = { 
@@ -374,6 +374,7 @@ political_decisions = {
 					add_accepted_culture = boer
 					set_country_flag = post_colonial_country
 				}
+				clr_global_flag = dutch_cape
 			}
 		}
 	}

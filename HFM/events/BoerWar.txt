@@ -11,7 +11,7 @@ country_event = {
 	picture = "pioneer_wagons"
 	
 	trigger = {
-		tag = ENG
+		owns = 2087
 		NOT = { has_global_flag = great_boer_trek }
 		NOT = { has_country_flag = boer_accepted }
 	}
@@ -558,7 +558,7 @@ country_event = {
 		set_global_flag = orange_river_sovereignty
 		2100 = { change_province_name = "Port St. Johns" }
 		SAF = {
-			primary_culture = british
+			primary_culture = THIS
 			add_accepted_culture = boer
 		}
 		any_owned = {
@@ -654,7 +654,7 @@ country_event = {
 		name = "EVT98215OPTB"
 		set_global_flag = orange_river_sovereignty
 		SAF = {
-			primary_culture = british
+			primary_culture = THIS
 			add_accepted_culture = boer
 		}
 		any_owned = {
@@ -817,7 +817,7 @@ country_event = {
 		name = "EVT98215OPTA"
 		set_global_flag = transvaal_sovereignty
 		SAF = {
-			primary_culture = british
+			primary_culture = THIS
 			add_accepted_culture = boer
 		}
 		any_owned = { 
@@ -962,7 +962,7 @@ country_event = {
 		name = "EVT98220OPTB"
 		set_global_flag = transvaal_sovereignty
 		SAF = {
-			primary_culture = british
+			primary_culture = THIS
 			add_accepted_culture = boer
 		}
 		any_owned = { 
@@ -1615,10 +1615,10 @@ country_event = {
 	}
 }
 
-country_event = { #Called if Appeal to the British decision is taken.
+country_event = { #Called if Appeal to the British decision is taken. Works for Cape Colony owner, not just Britain
 
 	id = 98241
-	title = "EVTNAME98241" #Appeal to the British for help
+	title = "EVTNAME98241" #Appeal to the British for help. Works for Cape Colony owner, not just Britain
 	desc = "EVTDESC98241"
 	picture = "boer_war"
 
@@ -1707,13 +1707,28 @@ country_event = {
 
 	trigger = {
 		war = no
-		tag = ENG
+		OR = {
+			AND = {
+				owns = 2087
+				capital_scope = {
+					continent = europe
+				}
+			}
+			2087 = { 
+				owner = {
+					vassal_of = {
+						capital_scope = { 
+							continent = europe
+						}
+					}
+				}
+			}
 		TRN = {
 			OR = {
 				neighbour = THIS
 				AND = {
 					neighbour = SAF
-					SAF = { vassal_of = ENG }
+					SAF = { vassal_of = { capital_scope = { continent = europe } } }
 				}
 			}
 			is_vassal = no
@@ -1759,10 +1774,10 @@ country_event = {
 			limit = {
 				tag = SAF
 				exists = yes
-				vassal_of = ENG
-				NOT = { alliance_with = ENG }
+				vassal_of = THIS
+				NOT = { alliance_with = THIS }
 			}
-			create_alliance = ENG
+			create_alliance = THIS
 		}
 		TRN = {
 			set_country_flag = uncivilize_on_conquest
@@ -1822,18 +1837,14 @@ country_event = {
 		}
 		random_country = { #Great Powers for the Boer Cause
 			limit = {
-				OR = {
-					tag = GCF
-					tag = GER
-					tag = NET
-					tag = FRA
-					tag = BOR
-				}
+				capital_scope = { continent = europe }
 				exists = yes
 				is_greater_power = yes
 				NOT = {
-					alliance_with = ENG	
-					truce_with = ENG
+					tag = RUS
+					tag = TUR
+					alliance_with = THIS	
+					truce_with = THIS
 					war_policy = pacifism
 					relation = { who = ENG value = 1 }
 				}
@@ -2124,10 +2135,7 @@ country_event = {
 
 	trigger = {
 		war = no
-		OR = {
-			tag = ENG
-			tag = ENL
-		}
+		owns = 2087
 		year = 1878
 		NOT = { exists = SAF }
 		ZUL = {
@@ -2204,10 +2212,7 @@ country_event = {
 	picture = "zulu"
 	
 	trigger = {
-		OR = {
-			tag = ENG
-			tag = ENL
-		}
+		owns = 2087
 		is_greater_power = yes
 		neighbour = XHO
 		NOT = {
@@ -2263,10 +2268,7 @@ country_event = {
 	fire_only_once = yes
 	
 	trigger = {
-		OR = {
-			tag = ENG
-			tag = ENL
-		}
+		owns = 2087
 		is_greater_power = yes
 		neighbour = XHO
 		OR = {
@@ -2382,7 +2384,6 @@ country_event = {
 	picture = "pioneer_wagons"
 	
 	trigger = {
-		tag = ENG
 		war = no
 		owns = 2087
 		year = 1840

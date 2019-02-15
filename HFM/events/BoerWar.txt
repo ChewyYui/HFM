@@ -1,7 +1,7 @@
 #################################################################
-#																#
-#                  Establishment of Natal						#
-#																#
+#								#
+#                  Establishment of Natal			#
+#								#
 #################################################################
 
 country_event = {
@@ -66,22 +66,62 @@ country_event = {
 			limit = { has_pop_culture = boer }
 			literacy = 0.25
 		}
-		2111 = {
-			any_pop = {
-				limit = { has_pop_culture = boer }
-				reduce_pop = 0.8
+		any_country = {
+			limit = { 
+				2087 = {
+					AND = {
+						has_core = VLK
+						NOT = { 
+							has_core = SAF
+						}
+					}
+				}
+				2111 = {
+					any_pop = {
+						limit = { has_pop_culture = boer }
+						reduce_pop = 0.8
+					}
+					add_core = VLK
+					add_core = NAL
+				}
+				2112 = {
+					any_pop = {
+						limit = { has_pop_culture = boer }
+						reduce_pop = 0.8
+					}
+					add_core = VLK
+					add_core = NAL
+				}
 			}
-			add_core = SAF
-			add_core = NAL
 		}
-		2112 = {
-			any_pop = {
-				limit = { has_pop_culture = boer }
-				reduce_pop = 0.8
+		any_country = {
+			limit = { 
+				2087 = {
+					AND = {
+						has_core = SAF
+						NOT = { 
+							has_core = VLK
+						}
+					}
+				}
+				2111 = {
+					any_pop = {
+						limit = { has_pop_culture = boer }
+						reduce_pop = 0.8
+					}
+					add_core = SAF
+					add_core = NAL
+				}
+				2112 = {
+					any_pop = {
+						limit = { has_pop_culture = boer }
+						reduce_pop = 0.8
+					}
+					add_core = SAF
+					add_core = NAL
+				}
 			}
-			add_core = SAF
-			add_core = NAL
-		}
+		}					
 		2087 = { owner = { country_event = 98206 } }
 		ai_chance = {
 			factor = 90
@@ -95,13 +135,43 @@ country_event = {
 			limit = { has_pop_culture = boer }
 			literacy = 0.25
 		}
-		2111 = {
-			add_core = SAF
-			add_core = NAL
+		any_country = {
+			limit = { 
+				2087 = {
+					AND = {
+						has_core = VLK
+						NOT = { 
+							has_core = SAF
+						}
+					}
+				}
+			2111 = {
+				add_core = VLK
+				add_core = NAL
+			}
+			2112 = {
+				add_core = VLK
+				add_core = NAL
+			}
 		}
-		2112 = {
-			add_core = SAF
-			add_core = NAL
+		any_country = {
+			limit = { 
+				2087 = {
+					AND = {
+						has_core = SAF
+						NOT = { 
+							has_core = VLK
+						}
+					}
+				}
+			2111 = {
+				add_core = SAF
+				add_core = NAL
+			}
+			2112 = {
+				add_core = SAF
+				add_core = NAL
+			}
 		}
 		2087 = { owner = { country_event = 98207 } }
 		any_pop = {
@@ -145,9 +215,61 @@ country_event = {
 			money = 250
 			move_pop = 2111
 		}
-		2112 = { change_province_name = "Ladysmith" secede_province = THIS  }
-		2111 = { change_province_name = "Pietermaritzburg" secede_province = THIS }
-		2111 = { state_scope = { change_region_name = "Natal" } }
+		random_owned = {
+			limit = {
+				owner = {
+					primary_culture = dutch
+				}
+			}
+			2112 = { 
+				change_province_name = "Kliprivier" 
+				secede_province = THIS  
+			}
+		}
+		random_owned = {
+			limit = {
+				NOT = {
+					owner = {
+						primary_culture = dutch
+					}
+				}
+			}
+			2112 = { 
+				change_province_name = "Ladysmith" 
+				secede_province = THIS  
+			}
+		}
+		2111 = { 
+			change_province_name = "Pietermaritzburg" 
+			secede_province = THIS 
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					has_country_flag = voc_policies
+				}
+			}
+			2111 = {
+				state_scope = {
+					change_region_name = "Natal"
+					is_slave = yes
+				}
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					NOT = {
+						has_country_flag = voc_policies
+					}
+				}
+			}
+			2111 = {
+				state_scope = {
+					change_region_name = "Natal"
+				}
+			}
+		}
 		ai_chance = { factor = 100 }
 	}
 	
@@ -170,8 +292,34 @@ country_event = {
 			money = 250
 			move_pop = 2111
 		}
-		2112 = { change_province_name = "Ladysmith" secede_province = THIS }
-		2111 = { change_province_name = "Pietermaritzburg" secede_province = THIS }
+		random_owned = {
+			limit = {
+				owner = {
+					primary_culture = dutch
+				}
+			}
+			2112 = { 
+				change_province_name = "Kliprivier" 
+				secede_province = THIS  
+			}
+		}
+		random_owned = {
+			limit = {
+				NOT = {
+					owner = {
+						primary_culture = dutch
+					}
+				}
+			}
+			2112 = { 
+				change_province_name = "Ladysmith" 
+				secede_province = THIS  
+			}
+		}
+		2111 = { 
+			change_province_name = "Pietermaritzburg" 
+			secede_province = THIS 
+		}
 		2111 = {
 			state_scope = {
 				change_region_name = "Natal"
@@ -200,9 +348,40 @@ country_event = {
 			money = 250
 			move_pop = 2111
 		}
-		2112 = { change_province_name = "Ladysmith" secede_province = THIS }
-		2111 = { change_province_name = "Pietermaritzburg" secede_province = THIS }
-		2111 = { state_scope = { change_region_name = "Natal" is_slave = yes } }
+		random_owned = {
+			limit = {
+				owner = {
+					primary_culture = dutch
+				}
+			}
+			2112 = { 
+				change_province_name = "Kliprivier" 
+				secede_province = THIS  
+			}
+		}
+		random_owned = {
+			limit = {
+				NOT = {
+					owner = {
+						primary_culture = dutch
+					}
+				}
+			}
+			2112 = { 
+				change_province_name = "Ladysmith" 
+				secede_province = THIS  
+			}
+		}
+		2111 = { 
+			change_province_name = "Pietermaritzburg" 
+			secede_province = THIS 
+		}
+		2111 = {
+			state_scope = {
+				change_region_name = "Natal"
+				is_slave = yes
+			}
+		}
 		change_tag_no_core_switch = NAL
 		ai_chance = { factor = 0 }
 	}
@@ -240,12 +419,59 @@ country_event = {
 			}
 			money = 250
 			move_pop = 2111
+		random_owned = {
+			limit = {
+				owner = {
+					primary_culture = dutch
+				}
+			}
+			2112 = { 
+				change_province_name = "Kliprivier" 
+				secede_province = THIS  
+			}
 		}
-		2112 = { change_province_name = "Ladysmith" }
-		2111 = { change_province_name = "Pietermaritzburg" }
-		2111 = {
-			state_scope = {
-				change_region_name = "Natal"
+		random_owned = {
+			limit = {
+				NOT = {
+					owner = {
+						primary_culture = dutch
+					}
+				}
+			}
+			2112 = { 
+				change_province_name = "Ladysmith" 
+				secede_province = THIS  
+			}
+		}
+		2111 = { 
+			change_province_name = "Pietermaritzburg" 
+			secede_province = THIS 
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					has_country_flag = voc_policies
+				}
+			}
+			2111 = {
+				state_scope = {
+					change_region_name = "Natal"
+					is_slave = yes
+				}
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					NOT = {
+						has_country_flag = voc_policies
+					}
+				}
+			}
+			2111 = {
+				state_scope = {
+					change_region_name = "Natal"
+				}
 			}
 		}
 		ai_chance = {
@@ -272,11 +498,38 @@ country_event = {
 			money = 250
 			move_pop = 2111
 		}
-		2112 = { change_province_name = "Ladysmith" }
-		2111 = { change_province_name = "Pietermaritzburg" }
+		random_owned = {
+			limit = {
+				owner = {
+					primary_culture = dutch
+				}
+			}
+			2112 = { 
+				change_province_name = "Kliprivier" 
+				secede_province = THIS  
+			}
+		}
+		random_owned = {
+			limit = {
+				NOT = {
+					owner = {
+						primary_culture = dutch
+					}
+				}
+			}
+			2112 = { 
+				change_province_name = "Ladysmith" 
+				secede_province = THIS  
+			}
+		}
+		2111 = { 
+			change_province_name = "Pietermaritzburg" 
+			secede_province = THIS 
+		}
 		2111 = {
 			state_scope = {
 				change_region_name = "Natal"
+				is_slave = yes
 			}
 		}
 		ai_chance = {
@@ -306,11 +559,38 @@ country_event = {
 			money = 250
 			move_pop = 2111
 		}
-		2112 = { change_province_name = "Ladysmith" }
-		2111 = { change_province_name = "Pietermaritzburg" }
+		random_owned = {
+			limit = {
+				owner = {
+					primary_culture = dutch
+				}
+			}
+			2112 = { 
+				change_province_name = "Kliprivier" 
+				secede_province = THIS  
+			}
+		}
+		random_owned = {
+			limit = {
+				NOT = {
+					owner = {
+						primary_culture = dutch
+					}
+				}
+			}
+			2112 = { 
+				change_province_name = "Ladysmith" 
+				secede_province = THIS  
+			}
+		}
+		2111 = { 
+			change_province_name = "Pietermaritzburg" 
+			secede_province = THIS 
+		}
 		2111 = {
 			state_scope = {
 				change_region_name = "Natal"
+				is_slave = yes
 			}
 		}
 		ai_chance = { factor = 0 }
@@ -507,9 +787,9 @@ country_event = {
 }
 
 #################################################################
-#																#
-#      	      Establishment of Oranje & Transvaal				#
-#																#
+#								#
+#      	      Establishment of Oranje & Transvaal		#
+#								#
 #################################################################
 
 country_event = {
@@ -557,10 +837,6 @@ country_event = {
 		name = "EVT98215OPTA"
 		set_global_flag = orange_river_sovereignty
 		2100 = { change_province_name = "Port St. Johns" }
-		SAF = {
-			primary_culture = THIS
-			add_accepted_culture = boer
-		}
 		any_owned = {
 			limit = {
 				OR = {
@@ -611,25 +887,73 @@ country_event = {
 			}
 			country_event = 98216
 		}
-		2101 = {
-			change_province_name = "Bloemfontein"
-			secede_province = THIS
-			add_core = ORA
-			add_core = SAF
+		random_owned = {
+				limit = {
+					owner = {
+						primary_culture = dutch
+					}
+				}
+			VLK = {
+				primary_culture = THIS
+				add_accepted_culture = boer
+			}
+			2101 = {
+				change_province_name = "Bloemfontein"
+				secede_province = THIS
+				add_core = ORA
+				add_core = VLK
+			}
+			2102 = {
+				secede_province = THIS
+				remove_core = MAT
+				add_core = ORA
+				add_core = VLK
+				change_province_name = "Winburg"
+				state_scope = { 
+					change_region_name = "Vrystaat" 
+				}
+			}
+			2103 = {
+				change_province_name = "Philippolis"
+				secede_province = THIS
+				add_core = ORA
+				add_core = VLK
+			}
 		}
-		2102 = {
-			secede_province = THIS
-			remove_core = MAT
-			add_core = ORA
-			add_core = SAF
-			change_province_name = "Winburg"
-			state_scope = { change_region_name = "Vrystaat" }
-		}
-		2103 = {
-			change_province_name = "Philippolis"
-			secede_province = THIS
-			add_core = ORA
-			add_core = SAF
+		random_owned = {
+				limit = {
+					NOT = {
+						owner = {
+							primary_culture = dutch
+						}
+					}
+				}
+			SAF = {
+				primary_culture = THIS
+				add_accepted_culture = boer
+			}
+			2101 = {
+				change_province_name = "Bloemfontein"
+				secede_province = THIS
+				add_core = ORA
+				add_core = SAF
+			}
+			2102 = {
+				secede_province = THIS
+				remove_core = MAT
+				add_core = ORA
+				add_core = SAF
+				change_province_name = "Winburg"
+				state_scope = { 
+					change_region_name = "Vrystaat" 
+				}
+			}
+			2103 = {
+				change_province_name = "Philippolis"
+				secede_province = THIS
+				add_core = ORA
+				add_core = SAF
+			}
 		}
 		release_vassal = ORA
 		relation = { who = ORA value = 50 }
@@ -706,25 +1030,73 @@ country_event = {
 			}
 			country_event = 98216
 		}
-		2101 = {
-			change_province_name = "Bloemfontein"
-			secede_province = THIS
-			add_core = ORA
-			add_core = SAF
+		random_owned = {
+				limit = {
+					owner = {
+						primary_culture = dutch
+					}
+				}
+			VLK = {
+				primary_culture = THIS
+				add_accepted_culture = boer
+			}
+			2101 = {
+				change_province_name = "Bloemfontein"
+				secede_province = THIS
+				add_core = ORA
+				add_core = VLK
+			}
+			2102 = {
+				secede_province = THIS
+				remove_core = MAT
+				add_core = ORA
+				add_core = VLK
+				change_province_name = "Winburg"
+				state_scope = { 
+					change_region_name = "Vrystaat" 
+				}
+			}
+			2103 = {
+				change_province_name = "Philippolis"
+				secede_province = THIS
+				add_core = ORA
+				add_core = VLK
+			}
 		}
-		2102 = {
-			secede_province = THIS
-			remove_core = MAT
-			add_core = ORA
-			add_core = SAF
-			change_province_name = "Winburg"
-			state_scope = { change_region_name = "Vrystaat" }
-		}
-		2103 = {
-			change_province_name = "Philippolis"
-			secede_province = THIS
-			add_core = ORA
-			add_core = SAF
+		random_owned = {
+				limit = {
+					NOT = {
+						owner = {
+							primary_culture = dutch
+						}
+					}
+				}
+			SAF = {
+				primary_culture = THIS
+				add_accepted_culture = boer
+			}
+			2101 = {
+				change_province_name = "Bloemfontein"
+				secede_province = THIS
+				add_core = ORA
+				add_core = SAF
+			}
+			2102 = {
+				secede_province = THIS
+				remove_core = MAT
+				add_core = ORA
+				add_core = SAF
+				change_province_name = "Winburg"
+				state_scope = { 
+					change_region_name = "Vrystaat" 
+				}
+			}
+			2103 = {
+				change_province_name = "Philippolis"
+				secede_province = THIS
+				add_core = ORA
+				add_core = SAF
+			}
 		}
 		release_vassal = ORA
 		relation = { who = ORA value = 50 }
@@ -816,10 +1188,6 @@ country_event = {
 	option = {
 		name = "EVT98215OPTA"
 		set_global_flag = transvaal_sovereignty
-		SAF = {
-			primary_culture = THIS
-			add_accepted_culture = boer
-		}
 		any_owned = { 
 			limit = {
 				OR = {
@@ -873,51 +1241,119 @@ country_event = {
 			}
 			country_event = 98221
 		}
-	
-		2105 = {
-			secede_province = THIS
-			remove_core = BSH
-			add_core = TRN
-			add_core = SAF
-			change_province_name = "Pretoria"
-			state_scope = { change_region_name = "Transvaal" }
+		random_owned = {
+				limit = {
+					owner = {
+						primary_culture = dutch
+					}
+				}
+			VLK = {
+				primary_culture = THIS
+				add_accepted_culture = boer
+			}
+			2105 = {
+				secede_province = THIS
+				remove_core = BSH
+				add_core = TRN
+				add_core = VLK
+				change_province_name = "Pretoria"
+				state_scope = { change_region_name = "Transvaal" }
+			}
+			2106 = {
+				change_province_name = "Witwatersrand"
+				secede_province = THIS
+				remove_core = BSH
+				add_core = TRN
+				add_core = VLK
+			}
+			2107 = {
+				change_province_name = "Klerksdorp"
+				secede_province = THIS
+				add_core = TRN
+				add_core = VLK
+			}
+			2108 = {
+				change_province_name = "Nylstroom"
+				add_core = TRN
+				add_core = VLK
+			}
+			2109 = {
+				change_province_name = "Lydenburg"
+				secede_province = THIS
+				add_core = TRN
+				add_core = VLK
+			}
+			2110 = { 
+				#change_province_name = "Hoedspruit"
+				#secede_province = THIS
+				remove_core = GAZ
+				add_core = TRN
+				add_core = VLK
+			}
+			3273 = {
+				change_province_name = "Pietersburg"
+				secede_province = THIS
+				add_core = TRN
+				add_core = VLK
+			}
 		}
-		2106 = {
-			change_province_name = "Witwatersrand"
-			secede_province = THIS
-			remove_core = BSH
-			add_core = TRN
-			add_core = SAF
-		}
-		2107 = {
-			change_province_name = "Klerksdorp"
-			secede_province = THIS
-			add_core = TRN
-			add_core = SAF
-		}
-		2108 = {
-			change_province_name = "Nylstroom"
-			add_core = TRN
-			add_core = SAF
-		}
-		2109 = {
-			change_province_name = "Lydenburg"
-			secede_province = THIS
-			add_core = TRN
-			add_core = SAF
-		}
-		2110 = { 
-			#change_province_name = "Hoedspruit"
-			#secede_province = THIS
-			remove_core = GAZ
-			add_core = TRN
-			add_core = SAF
-		}
-		3273 = {
-			change_province_name = "Hoedspruit"
-			secede_province = THIS
-			add_core = TRN
-			add_core = SAF
+		random_owned = {
+				limit = {
+					NOT = {
+						owner = {
+							primary_culture = dutch
+						}
+					}
+				}
+			SAF = {
+				primary_culture = THIS
+				add_accepted_culture = boer
+			}
+			2105 = {
+				secede_province = THIS
+				remove_core = BSH
+				add_core = TRN
+				add_core = SAF
+				change_province_name = "Pretoria"
+				state_scope = { change_region_name = "Transvaal" }
+			}
+			2106 = {
+				change_province_name = "Witwatersrand"
+				secede_province = THIS
+				remove_core = BSH
+				add_core = TRN
+				add_core = SAF
+			}
+			2107 = {
+				change_province_name = "Klerksdorp"
+				secede_province = THIS
+				add_core = TRN
+				add_core = SAF
+			}
+			2108 = {
+				change_province_name = "Nylstroom"
+				add_core = TRN
+				add_core = SAF
+			}
+			2109 = {
+				change_province_name = "Lydenburg"
+				secede_province = THIS
+				add_core = TRN
+				add_core = SAF
+			}
+			2110 = { 
+				#change_province_name = "Hoedspruit"
+				#secede_province = THIS
+				remove_core = GAZ
+				add_core = TRN
+				add_core = SAF
+			}
+			3273 = {
+				change_province_name = "Pietersburg"
+				secede_province = THIS
+				add_core = TRN
+				add_core = SAF
+			}
 		}
 		release_vassal = TRN
 		relation = { who = TRN value = 50 }
@@ -961,10 +1397,6 @@ country_event = {
 	option = {
 		name = "EVT98220OPTB"
 		set_global_flag = transvaal_sovereignty
-		SAF = {
-			primary_culture = THIS
-			add_accepted_culture = boer
-		}
 		any_owned = { 
 			limit = {
 				OR = {
@@ -1018,38 +1450,93 @@ country_event = {
 			}
 			country_event = 98221
 		}
-	
-		2105 = {
-			secede_province = THIS
-			remove_core = BSH
-			add_core = TRN
-			add_core = SAF
-			change_province_name = "Pretoria"
-			state_scope = { change_region_name = "Transvaal" }
+		random_owned = {
+				limit = {
+					owner = {
+						primary_culture = dutch
+					}
+				}
+			VLK = {
+				primary_culture = THIS
+				add_accepted_culture = boer
+			}
+			2105 = {
+				secede_province = THIS
+				remove_core = BSH
+				add_core = TRN
+				add_core = VLK
+				change_province_name = "Pretoria"
+				state_scope = { change_region_name = "Transvaal" }
+			}
+			2106 = {
+				change_province_name = "Witwatersrand"
+				secede_province = THIS
+				remove_core = BSH
+				add_core = TRN
+				add_core = VLK
+			}
+			2107 = {
+				change_province_name = "Klerksdorp"
+				secede_province = THIS
+				add_core = TRN
+				add_core = VLK
+			}
+			2108 = {
+				change_province_name = "Nylstroom"
+				add_core = TRN
+				add_core = VLK
+			}
+			2109 = {
+				change_province_name = "Lydenburg"
+				secede_province = THIS
+				add_core = TRN
+				add_core = VLK
+			}
 		}
-		2106 = {
-			change_province_name = "Witwatersrand"
-			secede_province = THIS
-			remove_core = BSH
-			add_core = TRN
-			add_core = SAF
-		}
-		2107 = {
-			change_province_name = "Klerksdorp"
-			secede_province = THIS
-			add_core = TRN
-			add_core = SAF
-		}
-		2108 = {
-			change_province_name = "Nylstroom"
-			add_core = TRN
-			add_core = SAF
-		}
-		2109 = {
-			change_province_name = "Lydenburg"
-			secede_province = THIS
-			add_core = TRN
-			add_core = SAF
+		random_owned = {
+				limit = {
+					NOT = {
+						owner = {
+							primary_culture = dutch
+						}
+					}
+				}
+			SAF = {
+				primary_culture = THIS
+				add_accepted_culture = boer
+			}
+			2105 = {
+				secede_province = THIS
+				remove_core = BSH
+				add_core = TRN
+				add_core = SAF
+				change_province_name = "Pretoria"
+				state_scope = { change_region_name = "Transvaal" }
+			}
+			2106 = {
+				change_province_name = "Witwatersrand"
+				secede_province = THIS
+				remove_core = BSH
+				add_core = TRN
+				add_core = SAF
+			}
+			2107 = {
+				change_province_name = "Klerksdorp"
+				secede_province = THIS
+				add_core = TRN
+				add_core = SAF
+			}
+			2108 = {
+				change_province_name = "Nylstroom"
+				add_core = TRN
+				add_core = SAF
+			}
+			2109 = {
+				change_province_name = "Lydenburg"
+				secede_province = THIS
+				add_core = TRN
+				add_core = SAF
+			}
 		}
 		release_vassal = TRN
 		relation = { who = TRN value = 50 }
@@ -1433,9 +1920,9 @@ country_event = {
 }
 
 #################################################################
-#																#
-#      	      	Buildup to Second Boer War Events				#
-#																#
+#								#
+#      	      	Buildup to Second Boer War Events		#
+#								#
 #################################################################
 
 country_event = {

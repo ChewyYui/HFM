@@ -322,38 +322,58 @@ political_decisions = {
 			owns = 2087
 			SAF = {
 				exists = no
-				NOT = { is_culture_group = THIS }
+				NOT = { 
+					is_culture_group = THIS 
+				}
 			}
-			NOT = { 
-				capital_scope = { continent = africa } 
-				capital_scope = { continent = west_africa } 
-				capital_scope = { continent = central_africa } 
-				capital_scope = { continent = east_africa } 
-				capital_scope = { continent = south_west_africa }
-				TAG = NET
-			}
+			tag = NET
 		}
-		
+
 		allow = {
 			war = no
 			owns = 2087
 		}
-		
+
 		effect = {
 			prestige = 10
-			SAF = {
-				primary_culture = THIS
-				add_accepted_culture = boer
-				set_country_flag = post_colonial_country
+			random_owned = {
+				limit = {
+					owner = {
+						primary_culture = dutch
+					}
+				}
+				SAF = {
+					all_core = {
+						remove_core = SAF
+						add_core = VLK
+					}
+				}
+				VLK = {
+					primary_culture = THIS
+					add_accepted_culture = boer
+					set_country_flag = post_colonial_country
+				}
 			}
 			any_owned = {
-				limit = { region = TRN_2108 }
+				limit = { 
+					region = TRN_2108 
+				}
 				remove_core = MAT
 				remove_core = GAZ
 			}
-			any_pop = {
-				limit = { location = { is_core = SAF } }
-				militancy = -3
+			random_owned = {
+				limit = {
+					NOT = {
+						owner = {
+							primary_culture = dutch
+						}
+					}
+				}
+				SAF = {
+					primary_culture = THIS
+					add_accepted_culture = boer
+					set_country_flag = post_colonial_country
+				}
 			}
 		}
 	}
@@ -427,8 +447,14 @@ political_decisions = {
 				}
 			}
 			OR = {
-				tag = SAF
-				SAF = { exists = no }
+				OR = {
+					tag = SAF
+					SAF = { exists = no }
+				}
+				OR = {
+					tag = VLK
+					VLK = { exists = no }
+				}
 			}
 		}
 		
@@ -476,7 +502,10 @@ political_decisions = {
 			2093 = {
 				empty = no
 				NOT = { owned_by = THIS }
-				NOT = { owned_by = SAF }
+				OR = {
+					NOT = { owned_by = SAF }
+					NOT = { owned_by = VLK }
+				}
 			}
 			NOT = { has_country_flag = claimed_north_cape_colony }
 		}
@@ -615,14 +644,17 @@ political_decisions = {
 					}
 				}
 				random_country = {
-				limit = {
-					tag = XHO
-					NOT = { owns = 2098 }
-					owns = 2099
-				}
-				2099 = {
-					add_core = SAF
-					secede_province = THIS
+					limit = {
+						tag = XHO
+						NOT = { 
+							owns = 2098 
+						}
+						owns = 2099
+					}
+					2099 = {
+						add_core = SAF
+						secede_province = THIS
+					}
 				}
 				random_country = {
 					limit = {
@@ -710,7 +742,7 @@ political_decisions = {
 						}
 					}
 				}
-				098 = { 
+				2098 = { 
 					add_core = SAF 
 				}
 				2099 = { 
